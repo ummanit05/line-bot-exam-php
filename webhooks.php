@@ -21,6 +21,12 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
+			$TextInput = $event['message']['text'];
+
+			if($TextInput == 'A') {
+				$text = 'URL A';
+			}
+			
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
@@ -49,4 +55,5 @@ if (!is_null($events['events'])) {
 		}
 	}
 }
+
 echo "OKKK";
