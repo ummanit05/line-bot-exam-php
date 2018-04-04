@@ -5,8 +5,6 @@ require_once('vendor/linecorp/line-bot-sdk/line-bot-sdk-tiny/LINEBotTiny.php');
 
 $access_token = 'HspCUc6oAStzfcVTfpNN7JM4FmUZtEY0Nosd0B+uFtWxJ785gx6lTjNf2zlQKxnCuB9MxEqFt8oTuHWWJkoOPko7g1lYQOXn8jb1V9ksnEetrXiMGpsioGZZ5b3mpPM2qCVyBzkgEcJtqDlr7LGkGAdB04t89/1O/w1cDnyilFU=';
 
-//
-
 // Get POST body content
 $content = file_get_contents('php://input');
 // Parse JSON
@@ -18,7 +16,8 @@ if (!is_null($events['events'])) {
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
-			$text = $event['source']['userId'];
+			// $text = $event['source']['userId'];
+			$text = $event['message']['text'];
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
