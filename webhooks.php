@@ -36,23 +36,57 @@ if (!is_null($events['events'])) {
 			}
 
 			// Build message to reply back
-			$messages = array();
-
-			array_push($messages, array(
+			$messages = [
 				'type' => 'text',
 				'text' => $text
-			));
-			array_push($messages, array(
-				'type' 				 => 'image',
-				'originalContentUrl' => 'https://images.pexels.com/photos/160107/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
-				'previewImageUrl'    => 'https://images.pexels.com/photos/160107/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&h=75&w=126'
-			));
+			];
+
+			$messages = [
+				'type' => 'text',
+				'text' => $text."XXX"
+			];
+
+$messages = [
+  "type" => "template",
+  "altText" => "This is a buttons template",
+  "template" => [
+      "type" => "buttons",
+      "thumbnailImageUrl" => "https://images.pexels.com/photos/160107/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+      "imageAspectRatio" => "rectangle",
+      "imageSize" => "cover",
+      "imageBackgroundColor" => "#FFFFFF",
+      "title" => "Menu",
+      "text" => "Please select",
+      "defaultAction" => [
+          "type" => "uri",
+          "label" => "View detail",
+          "uri" => "http://www.google.co.th"
+      ],
+      "actions" => [
+          [
+            "type"=> "postback",
+            "label"=> "Buy",
+            "data"=> "action=buy&itemid=123"
+          ],
+          [
+            "type"=> "postback",
+            "label"=> "Add to cart",
+            "data"=> "action=add&itemid=123"
+          ],
+          [
+            "type"=> "uri",
+            "label"=> "View detail",
+            "uri"=> "http://example.com/page/123"
+          ]
+      ]
+  	]
+]
 
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
 				'replyToken' => $replyToken,
-				'messages' => $messages,
+				'messages' => [$messages],
 			];
 			$post = json_encode($data);
 			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
