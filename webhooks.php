@@ -7,19 +7,14 @@ $access_token = 'HspCUc6oAStzfcVTfpNN7JM4FmUZtEY0Nosd0B+uFtWxJ785gx6lTjNf2zlQKxn
 
 // Get POST body content
 $content = file_get_contents('php://input');
-
 // Parse JSON
 $events = json_decode($content, true);
-
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
-
 	// Loop through each event
 	foreach ($events['events'] as $event) {
-
 		// Reply only when message sent is in 'text' format
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
-
 			// Get text sent
 			// $text = $event['source']['userId'];
 			$text = $event['message']['text'];
@@ -40,47 +35,6 @@ if (!is_null($events['events'])) {
 				'type' => 'text',
 				'text' => $text
 			];
-
-			$messages = [
-				'type' => 'text',
-				'text' => $text."XXX"
-			];
-
-$messages = [
-  "type" => "template",
-  "altText" => "This is a buttons template",
-  "template" => [
-      "type" => "buttons",
-      "thumbnailImageUrl" => "https://images.pexels.com/photos/160107/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-      "imageAspectRatio" => "rectangle",
-      "imageSize" => "cover",
-      "imageBackgroundColor" => "#FFFFFF",
-      "title" => "Menu",
-      "text" => "Please select",
-      "defaultAction" => [
-          "type" => "uri",
-          "label" => "View detail",
-          "uri" => "http://www.google.co.th"
-      ],
-      "actions" => [
-          [
-            "type"=> "postback",
-            "label"=> "Buy",
-            "data"=> "action=buy&itemid=123"
-          ],
-          [
-            "type"=> "postback",
-            "label"=> "Add to cart",
-            "data"=> "action=add&itemid=123"
-          ],
-          [
-            "type"=> "uri",
-            "label"=> "View detail",
-            "uri"=> "http://example.com/page/123"
-          ]
-      ]
-  	]
-]
 
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
