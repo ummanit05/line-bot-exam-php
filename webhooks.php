@@ -81,7 +81,14 @@ if (!is_null($events['events'])) {
 
 			$text = '';
 			foreach ($event as $key => $value) {
-				$text .= 'Key => '.$key.' , Value => '.$value." ## ";
+				if(is_array($value)) {
+					$value2 = $value;
+					foreach ($value2 as $key2 => $value2) {
+						$text .= 'Key2 => '.$key2.' , Value2 => '.$value2." ## ";
+					}
+				} else {
+					$text .= 'Key => '.$key.' , Value => '.$value." ## ";
+				}
 			}
 
 			// Build message to reply back
