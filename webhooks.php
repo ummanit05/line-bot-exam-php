@@ -23,10 +23,13 @@ if (!is_null($events['events'])) {
 
 			$TextInput = $event['message']['text'];
 
-			if($TextInput == 'A') {
+			if($TextInput == 'รู้จักกับเรา') {
+				$text = '';
+				break;
+			} else if($TextInput == 'A') {
 				$text = 'URL A';
 			}
-			
+
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
